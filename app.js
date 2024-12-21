@@ -1,107 +1,204 @@
-/** @Position1 @Winner */
-/***********
-// 1. DRY (Don't Repeat yourself)
-// 2.my code is modular/ single responsibilty principle/ divided into components
-// 3. reusable
-// 4. only single loop
-***/
-
-let radius=[1,2,3,4];
-
-function areaOfCircle(r){
-  return Math.PI*r*r;
-}
-
-function circumferenceOfCircle(r){
-  return 2*Math.PI*r;
-}
-
-function diameter(r){
-  return 2*r;
-}
-
-// Array.prototype 
-function circle(calculate){
-  let arr=[];
-  for(var i=0; i<radius.length; i++)
-       arr.push(calculate(radius[i]));
-  
-  return arr;
-}
-
-console.log(circle(areaOfCircle));
-console.log(circle(circumferenceOfCircle));
-console.log(circle(diameter));
-
-
-/** @Position2ndlast */
 /**
- * issues in this code
- * 1. not modular  function area not have single responsibilty
- * 2. not reusable cann't use code  for each keys
- * 3. repeatation of code  i.e  arr.push 
- * 
- * good part is
- * 1. not multiple loops
+ * map, filter, reduce are higher order functions
+ * Higher order functions takes function as a parameter
  */
+/* behind the *******@scenes of ******@map, @filter and @reduce */
+// const arr = [1,2,6,73,5,8,9,11];
 
-/**
-let radius=[1,2,3,4];
+// function odd(x){
+//   console.log(x%2);
+  
+//   return x%2;
+// }
+// const new__arr = arr.filter(odd);
+// console.log(new__arr);
 
-function area(key){
-  let arr=[];
-  for(var i=0; i<radius.length; i++){
-    if(key===1)
-       arr.push(Math.PI*radius[i]*radius[i]);
-    else if(key===2)
-      arr.push(2*Math.PI*radius[i]);
-    else 
-      arr.push(2*radius[i]);
+
+
+
+// ************Object ki values dynamically or singly kaise access karte hai bahut zarurat hai padne ki
+
+
+// // output {26:2, 27:1, 28:1};
+// users.reduce((acc, curr)=>
+//   {
+//     acc
+//   },0)
+
+const arr = [1,4,6,2,3,2];
+const users1=[
+  {fistName:'siddharth', lastname:'saniyan', age:26},
+  {fistName:'amitabh', lastname:'bachchan', age:80},
+  {fistName:'elon', lastname:'musk', age:50},
+  {fistName:'akshay', lastname:'saini', age:28}
+ ]
+ const users=[
+   {firstName:'siddharth', lastname:'saniyan', age:26},
+   {firstName:'kk', lastname:'singer', age:26},
+   {firstName:'amitabh', lastname:'bachchan', age:80},
+   {firstName:'elon', lastname:'musk', age:50},
+   {firstName:'akshay', lastname:'saini', age:28}
+ ]
+/**acc=> accumulator, acts like sum variable containing sum of all elements of array 
+ * curr=> current
+*/
+// #Example1:
+const arr1 = arr.reduce(function sum(acc, curr){
+   acc+=curr;
+   return acc;
+},0);
+
+// #Example2:
+const obj= users1.reduce(function(acc, curr){
+  if(acc[curr.age]){
+    acc[curr.age]+=1;
+  }else{
+    acc[curr.age] =1
   }
-  return arr
-}
+  return acc;
+},{})
 
-console.log(area(1));
-console.log(area(2));
-console.log(area(3));
-******/
-
-/** @Positionlast */
-/**
- * very poor code
- * 1. multiple loops, multiple arrays
- * 2. repeatation of code  i.e loop and arr.push 
- *  
- * good is 
- * 1. reusability
- */
-
-/**
-let radius=[1,2,3,4];
-let arrArea=[];
-let circumferenceArr = [];
-let diameterArr = [];
-
-function area(){
-  for(let i=0; i<radius.length; i++)
-      arrArea.push(Math.PI*radius[i]*radius[i]);
+// Example 3:
+const arr3 = users.reduce(function(acc, curr){
+  // console.log(curr['firstName']['firstName']);
+  // console.log(acc)
+  if(curr['firstName']['age']>30) acc.push({'firstName':curr['firstName']['firstName']});
+  // console.log(acc);
   
+  return acc;
+},[])
+// console.log(arr3);
+// console.log(users.filter(function(user){
+//   return user.age>30;
+// }));
+// console.log(users);
+
+const newArr =[];
+for(let i=0; i<users.length; i++)
+  if(users[i].age>30) return newArr.push(users[i]);
+
+console.log({newArr});
+
+// #Example 4: DOt Notation vs Bracket Notation
+
+// const obj2={name:'ankit', lastName:'kumar', age:50, location:'Meerut'};
+// // obj2.location='delhi';
+// const newKey = 'lastName';
+
+// /*** using dot notation */
+// console.log(obj2.newKey);
+// //  o/p undefined
+
+// /*******accessing key as a variable ****/
+// console.log(obj2[newKey]);  
+// // o/p kumar
+
+// /***** accessing *****/
+// obj2['newCity']='Noida';
+// console.log(obj2['newCity']);
+
+// #Example5:
+const source = [
+  {
+    batch_id: '123',
+    name: 'Tony',
+    contact: '9872276210',
+  },
+  {
+    batch_id: '231',
+    name: 'Steve',
+    contact: '7876543210',
+  },
+  {
+    batch_id: '123',
+    name: 'Bruce',
+    contact: '6776543210',
+  },
+  {
+    batch_id: '321',
+    name: 'Clint',
+    contact: '8954643210',
+  },
+  {
+    batch_id: '123',
+    name: 'Peter',
+    contact: '7666543210',
+  },
+  {
+    batch_id: '231',
+    name: 'Phil',
+    contact: '8896543210',
+  },
+  {
+    batch_id: '321',
+    name: 'Nick',
+    contact: '9876521210',
+  },
+]
+
+const result = [
+  {
+    '123': [
+      {
+        name: 'Tony',
+        contact: '9872276210',
+      },
+      {
+        name: 'Bruce',
+        contact: '6776543210',
+      },
+      {
+        name: 'Peter',
+        contact: '7666543210',
+      },
+    ],
+  },
+  {
+    '231': [
+      {
+        name: 'Steve',
+        contact: '7876543210',
+      },
+      {
+        name: 'Phil',
+        contact: '8896543210',
+      },
+    ],
+  },
+  {
+    '321': [
+      {
+        name: 'Nick',
+        contact: '9876521210',
+      },
+      {
+        name: 'Clint',
+        contact: '8954643210',
+      },
+    ],
+  },
+]
+
+
+function converSrcToResult() {
+  //  source.reduce(function(acc, curr){
+  //   // curr['batch_id']
+  //   // acc.push(curr['batch_id'])
+  //   curr['batch_id']
+
+  //  })
+  source.reduce(function(acc, curr){
+    // curr['batch_id']
+  //   acc.push(
+  //     {
+  //       curr['batch_id']:[
+  //       {
+  //         name:curr['name'],
+  //         contact:curr['contact']
+  //       },
+  //    ]
+  //   }
+  // )
+  },[])
 }
 
-function circumference(){
-  for(var i=0; i<radius.length; i++)
-    circumferenceArr.push(2*Math.PI.radius[i]);
-}
-
-function diameter(){
-  for(let i=0; i<radius.length; i++)
-    diameterArr.push(2*radius[i]);
-}
-area();
-circumferenceArr();
-diameter();
-console.log(arrArea);
-console.log(circumferenceArr);
-console.log(diameterArr);
-
-**/
