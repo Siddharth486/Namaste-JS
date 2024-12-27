@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>hello</h1>
+  <script>
+const arr = [
+    {id:1,name:'siddharth', email:'s@gmail.com', city:'Noida'},
+    {id:2,name:'ankit', email:'a@gmail.com', city:'Delhi'},
+    {id:3,name:'suresh', email:'ss@gmail.com', city:'Mumbai'},
+    {id:4,name:'pundir', email:'spgmail.com', city:'Pune'}
+];
+
+const users=[
+   {firstName:'siddharth', lastname:'saniyan', age:26},
+   {firstName:'kk', lastname:'singer', age:26},
+   {firstName:'amitabh', lastname:'bachchan', age:80},
+   {firstName:'elon', lastname:'musk', age:50},
+   {firstName:'akshay1', lastname:'saini1', age:28},
+   {firstName:'akshay2', lastname:'saini2', age:29},
+   {firstName:'akshay2', lastname:'saini3', age:30},
+   {firstName:'akshay4', lastname:'saini4', age:31},
+]
+// o/p
+const output = arr.reduce(function(acc, curr){
+  acc.push({id:curr['id'], name:curr['name']});
+  return acc;
+},[]);
+
+
+
+// console.log({output:output}, {arr:arr});
+  </script>
+</body>
+</html>

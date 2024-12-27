@@ -37,7 +37,10 @@ const users1=[
    {firstName:'kk', lastname:'singer', age:26},
    {firstName:'amitabh', lastname:'bachchan', age:80},
    {firstName:'elon', lastname:'musk', age:50},
-   {firstName:'akshay', lastname:'saini', age:28}
+   {firstName:'akshay1', lastname:'saini1', age:28},
+   {firstName:'akshay2', lastname:'saini2', age:29},
+   {firstName:'akshay2', lastname:'saini3', age:30},
+   {firstName:'akshay4', lastname:'saini4', age:31},
  ]
 /**acc=> accumulator, acts like sum variable containing sum of all elements of array 
  * curr=> current
@@ -62,12 +65,12 @@ const obj= users1.reduce(function(acc, curr){
 const arr3 = users.reduce(function(acc, curr){
   // console.log(curr['firstName']['firstName']);
   // console.log(acc)
-  if(curr['firstName']['age']>30) acc.push({'firstName':curr['firstName']['firstName']});
+  if(curr['age']>30) acc.push({'firstName':curr['firstName']});
   // console.log(acc);
   
   return acc;
 },[])
-// console.log(arr3);
+console.log(arr3);
 // console.log(users.filter(function(user){
 //   return user.age>30;
 // }));
@@ -75,9 +78,10 @@ const arr3 = users.reduce(function(acc, curr){
 
 const newArr =[];
 for(let i=0; i<users.length; i++)
-  if(users[i].age>30) return newArr.push(users[i]);
+  if(users[i].age>30)  newArr.push(users[i]);
+  else continue;
 
-console.log({newArr});
+// console.log({newArr});
 
 // #Example 4: DOt Notation vs Bracket Notation
 
