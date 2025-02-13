@@ -1,11 +1,12 @@
-// event loop
-console.log('start');
+debugger;
+function parent(){
+  let num = 1;
+  var child = ()=>{
+      console.log(num);
+  }
+  num++;
+  return child;
+}
 
-setTimeout(()=>{
-  console.log('callback queue')
-},4000);
-
-fetch('https://google.com')
-.then((res)=> console.log('micro task queue'));
-
-console.log('end');
+const child = parent();
+child();
